@@ -1,0 +1,1926 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- =========================================================
+     [01] PAGE CONFIGURATION
+========================================================= -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UNSEALED — The Story Behind the Story</title>
+
+<style>
+
+/* =========================================================
+   [02] GLOBAL VARIABLES
+========================================================= */
+
+:root {
+    --black: #050505;
+    --dark: #090909;
+    --panel: #111111;
+    --panel-light: #171717;
+
+    --white: #f5f5f5;
+    --grey: #a2a2a2;
+    --muted: #686868;
+
+    --accent: #e7e0d3;
+
+    --border: rgba(255,255,255,0.12);
+
+    --transition: 0.35s cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   [03] NAVIGATION
+========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    z-index: 1000;
+
+    background: linear-gradient(
+        rgba(0,0,0,.75),
+        rgba(0,0,0,0)
+    );
+
+    transition: var(--transition);
+}
+
+.navbar.scrolled {
+    background: rgba(5,5,5,.94);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.logo span {
+    font-weight: 300;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    opacity: .75;
+
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    opacity: 1;
+}
+
+.admin-button {
+    border: 1px solid rgba(255,255,255,.3);
+
+    background: rgba(255,255,255,.05);
+
+    color: white;
+
+    padding: 11px 17px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    transition: var(--transition);
+}
+
+.admin-button:hover {
+    background: white;
+    color: black;
+}
+
+
+/* =========================================================
+   [04] CINEMATIC HERO
+========================================================= */
+
+.hero {
+    height: 100vh;
+    min-height: 700px;
+
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: brightness(.52);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            #050505 0%,
+            rgba(5,5,5,.1) 55%,
+            rgba(0,0,0,.3) 100%
+        );
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    padding: 0 7vw 90px;
+
+    max-width: 1000px;
+}
+
+.hero-small {
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: #ddd;
+
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-size: clamp(70px, 12vw, 190px);
+
+    line-height: .78;
+
+    letter-spacing: -8px;
+
+    font-weight: 900;
+}
+
+.hero-title span {
+    display: block;
+    font-weight: 300;
+}
+
+.hero-description {
+    max-width: 560px;
+
+    color: #c7c7c7;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-top: 35px;
+}
+
+.hero-button {
+    margin-top: 30px;
+
+    padding: 15px 25px;
+
+    border: 1px solid white;
+
+    background: white;
+
+    color: black;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 11px;
+
+    transition: var(--transition);
+}
+
+.hero-button:hover {
+    background: transparent;
+    color: white;
+}
+
+
+/* =========================================================
+   [05] SECTION SYSTEM
+========================================================= */
+
+.section {
+    padding: 120px 7vw;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 45px;
+}
+
+.section-label {
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color: var(--grey);
+
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: clamp(40px, 5vw, 75px);
+
+    line-height: .9;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+}
+
+.section-number {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   [06] FEATURED VIDEO
+========================================================= */
+
+.featured {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 8;
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+.featured video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: .8;
+}
+
+.featured-info {
+    position: absolute;
+
+    bottom: 35px;
+    left: 35px;
+
+    z-index: 2;
+}
+
+.featured-info h3 {
+    font-size: 42px;
+
+    letter-spacing: -2px;
+}
+
+.featured-info p {
+    color: #bbb;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   [07] CATEGORY FILTERS
+========================================================= */
+
+.filters {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 35px;
+
+    flex-wrap: wrap;
+}
+
+.filter {
+    background: transparent;
+
+    color: #999;
+
+    border: 1px solid var(--border);
+
+    padding: 10px 16px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    transition: var(--transition);
+}
+
+.filter:hover,
+.filter.active {
+    background: white;
+
+    color: black;
+
+    border-color: white;
+}
+
+
+/* =========================================================
+   [08] VIDEO / LEAK GRID
+========================================================= */
+
+.video-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.video-card {
+    background: var(--panel);
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+    overflow: hidden;
+}
+
+.video-card:hover {
+    transform: translateY(-7px);
+}
+
+.thumbnail {
+    position: relative;
+
+    aspect-ratio: 16 / 9;
+
+    background:
+        linear-gradient(
+            135deg,
+            #222,
+            #090909
+        );
+
+    overflow: hidden;
+}
+
+.thumbnail video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .6s ease;
+}
+
+.video-card:hover .thumbnail video {
+    transform: scale(1.05);
+}
+
+.play-icon {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%,-50%);
+
+    width: 55px;
+    height: 55px;
+
+    border: 1px solid rgba(255,255,255,.7);
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    background: rgba(0,0,0,.35);
+
+    backdrop-filter: blur(10px);
+}
+
+.play-icon::after {
+    content: "";
+
+    width: 0;
+    height: 0;
+
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 11px solid white;
+
+    margin-left: 3px;
+}
+
+.card-info {
+    padding: 20px;
+}
+
+.card-category {
+    color: #888;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.card-title {
+    margin-top: 10px;
+
+    font-size: 20px;
+
+    line-height: 1.2;
+}
+
+.card-date {
+    margin-top: 16px;
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   [09] VIDEO MODAL
+========================================================= */
+
+.video-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    background: rgba(0,0,0,.95);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.video-modal.active {
+    display: flex;
+}
+
+.modal-container {
+    width: min(1200px, 100%);
+}
+
+.modal-video {
+    width: 100%;
+
+    max-height: 75vh;
+
+    background: black;
+}
+
+.modal-details {
+    padding-top: 20px;
+}
+
+.modal-details h2 {
+    font-size: 35px;
+}
+
+.modal-details p {
+    color: #999;
+
+    margin-top: 10px;
+}
+
+.close-modal {
+    position: absolute;
+
+    top: 25px;
+    right: 30px;
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   [10] ADMIN LOGIN
+========================================================= */
+
+.admin-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    background: rgba(0,0,0,.96);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.admin-overlay.active {
+    display: flex;
+}
+
+.admin-panel {
+    width: 420px;
+
+    background: #101010;
+
+    border: 1px solid var(--border);
+
+    padding: 40px;
+}
+
+.admin-panel h2 {
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+.admin-panel p {
+    color: #777;
+
+    font-size: 12px;
+
+    margin-bottom: 30px;
+}
+
+.admin-input {
+    width: 100%;
+
+    background: #080808;
+
+    border: 1px solid var(--border);
+
+    color: white;
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    outline: none;
+}
+
+.admin-submit {
+    width: 100%;
+
+    background: white;
+
+    color: black;
+
+    border: none;
+
+    padding: 14px;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   [11] ADMIN DASHBOARD
+========================================================= */
+
+.dashboard {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3500;
+
+    background: #070707;
+
+    display: none;
+
+    overflow-y: auto;
+}
+
+.dashboard.active {
+    display: block;
+}
+
+.dashboard-header {
+    height: 80px;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 40px;
+}
+
+.dashboard-title {
+    letter-spacing: 4px;
+
+    font-size: 18px;
+}
+
+.dashboard-content {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 70px 25px;
+}
+
+.upload-box {
+    border: 1px dashed #444;
+
+    background: #0d0d0d;
+
+    padding: 50px;
+
+    text-align: center;
+
+    margin-top: 30px;
+
+    transition: var(--transition);
+}
+
+.upload-box:hover {
+    border-color: #888;
+}
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+.upload-label {
+    display: inline-block;
+
+    padding: 15px 25px;
+
+    background: white;
+
+    color: black;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 10px;
+}
+
+.file-name {
+    margin-top: 15px;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.upload-fields {
+    margin-top: 30px;
+}
+
+.upload-fields input,
+.upload-fields textarea,
+.upload-fields select {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    background: #0c0c0c;
+
+    border: 1px solid var(--border);
+
+    color: white;
+
+    outline: none;
+}
+
+.upload-fields textarea {
+    min-height: 130px;
+
+    resize: vertical;
+}
+
+.publish-button {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    background: white;
+
+    color: black;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.logout-button {
+    background: transparent;
+
+    color: white;
+
+    border: 1px solid var(--border);
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   [12] FOOTER
+========================================================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    padding: 60px 7vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   [13] MOBILE
+========================================================= */
+
+@media(max-width: 900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .hero-content {
+        padding: 0 25px 60px;
+    }
+
+    .hero-title {
+        letter-spacing: -5px;
+    }
+
+    .section {
+        padding: 80px 25px;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-info h3 {
+        font-size: 28px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     [14] NAVIGATION
+========================================================= -->
+
+<header class="navbar" id="navbar">
+
+    <div class="logo">
+        UN<span>SEALED</span>
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="#latest">Latest</a>
+
+        <a href="#videos">Videos</a>
+
+        <a href="#about">About</a>
+
+    </nav>
+
+    <button
+        class="admin-button"
+        onclick="openAdmin()">
+
+        ADMIN
+
+    </button>
+
+</header>
+
+
+<!-- =========================================================
+     [15] HERO
+========================================================= -->
+
+<section class="hero">
+
+    <!-- Replace this source with your own cinematic background video -->
+    <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline>
+
+        <source
+            src=""
+            type="video/mp4">
+
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            Independent Intelligence
+        </div>
+
+        <h1 class="hero-title">
+
+            UNSEALED
+
+            <span>THE FEED.</span>
+
+        </h1>
+
+        <p class="hero-description">
+
+            Breaking stories. Emerging information.
+            Unreleased footage. The things happening
+            before they become headlines.
+
+        </p>
+
+        <button
+            class="hero-button"
+            onclick="scrollToLatest()">
+
+            Explore
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     [16] FEATURED VIDEO
+========================================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                Featured
+            </div>
+
+            <h2 class="section-title">
+                THE LATEST.
+            </h2>
+
+        </div>
+
+        <div class="section-number">
+            01 / 04
+        </div>
+
+    </div>
+
+
+    <div class="featured">
+
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            controls>
+
+            <source
+                src=""
+                type="video/mp4">
+
+        </video>
+
+        <div class="featured-info">
+
+            <h3>
+                Featured Unsealed Report
+            </h3>
+
+            <p>
+                Add your latest video from the admin dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     [17] LATEST VIDEOS
+========================================================= -->
+
+<section
+    class="section"
+    id="latest">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                Unsealed
+            </div>
+
+            <h2 class="section-title">
+                LATEST.
+            </h2>
+
+        </div>
+
+        <div class="section-number">
+            02 / 04
+        </div>
+
+    </div>
+
+
+    <!-- CATEGORY FILTERS -->
+
+    <div class="filters">
+
+        <button
+            class="filter active"
+            onclick="filterVideos('all', this)">
+
+            All
+
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterVideos('Gaming', this)">
+
+            Gaming
+
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterVideos('Technology', this)">
+
+            Technology
+
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterVideos('Entertainment', this)">
+
+            Entertainment
+
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterVideos('Other', this)">
+
+            Other
+
+        </button>
+
+    </div>
+
+
+    <!-- VIDEO GRID -->
+
+    <div
+        class="video-grid"
+        id="videoGrid">
+
+
+        <!-- SAMPLE VIDEO -->
+
+        <article
+            class="video-card"
+            data-category="Gaming"
+            onclick="openVideo(
+                '',
+                'Sample Unsealed Report',
+                'Gaming'
+            )">
+
+            <div class="thumbnail">
+
+                <video
+                    muted
+                    loop
+                    preload="metadata">
+
+                    <source
+                        src=""
+                        type="video/mp4">
+
+                </video>
+
+                <div class="play-icon"></div>
+
+            </div>
+
+            <div class="card-info">
+
+                <div class="card-category">
+                    Gaming
+                </div>
+
+                <div class="card-title">
+                    Sample Unsealed Report
+                </div>
+
+                <div class="card-date">
+                    AUGUST 20, 2026
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     [18] ABOUT
+========================================================= -->
+
+<section
+    class="section"
+    id="about">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-label">
+                About Unsealed
+            </div>
+
+            <h2 class="section-title">
+                SEE WHAT'S<br>
+                HIDDEN.
+            </h2>
+
+        </div>
+
+        <div class="section-number">
+            03 / 04
+        </div>
+
+    </div>
+
+    <p
+        style="
+        max-width:650px;
+        color:#999;
+        font-size:17px;
+        line-height:1.8;
+        ">
+
+        Unsealed is an independent platform designed
+        around emerging stories, video reports and
+        information that deserves attention.
+
+    </p>
+
+</section>
+
+
+<!-- =========================================================
+     [19] VIDEO MODAL
+========================================================= -->
+
+<div
+    class="video-modal"
+    id="videoModal">
+
+    <button
+        class="close-modal"
+        onclick="closeVideo()">
+
+        ×
+
+    </button>
+
+    <div class="modal-container">
+
+        <video
+            class="modal-video"
+            id="modalVideo"
+            controls>
+
+        </video>
+
+        <div class="modal-details">
+
+            <div
+                class="card-category"
+                id="modalCategory">
+
+            </div>
+
+            <h2 id="modalTitle">
+                Video
+            </h2>
+
+            <p>
+                Unsealed video report.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     [20] ADMIN LOGIN
+========================================================= -->
+
+<div
+    class="admin-overlay"
+    id="adminOverlay">
+
+    <div class="admin-panel">
+
+        <h2>
+            ADMIN
+        </h2>
+
+        <p>
+            Unsealed content management.
+        </p>
+
+        <input
+            class="admin-input"
+            id="adminUsername"
+            type="text"
+            placeholder="Username">
+
+        <input
+            class="admin-input"
+            id="adminPassword"
+            type="password"
+            placeholder="Password">
+
+        <button
+            class="admin-submit"
+            onclick="loginAdmin()">
+
+            Enter Dashboard
+
+        </button>
+
+        <button
+            onclick="closeAdmin()"
+            style="
+            width:100%;
+            margin-top:10px;
+            padding:12px;
+            background:transparent;
+            border:1px solid #333;
+            color:#aaa;
+            cursor:pointer;
+            ">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     [21] ADMIN DASHBOARD
+========================================================= -->
+
+<div
+    class="dashboard"
+    id="dashboard">
+
+    <div class="dashboard-header">
+
+        <div class="dashboard-title">
+            UNSEALED / ADMIN
+        </div>
+
+        <button
+            class="logout-button"
+            onclick="logoutAdmin()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+
+    <div class="dashboard-content">
+
+        <div class="section-label">
+            Content Manager
+        </div>
+
+        <h1>
+            Upload Video
+        </h1>
+
+        <p
+            style="
+            color:#777;
+            margin-top:10px;
+            ">
+
+            Add a new video to the Unsealed feed.
+
+        </p>
+
+
+        <!-- VIDEO UPLOAD -->
+
+        <div class="upload-box">
+
+            <label
+                class="upload-label"
+                for="videoUpload">
+
+                Select Video
+
+            </label>
+
+            <input
+                id="videoUpload"
+                type="file"
+                accept="video/*"
+                onchange="showFileName()">
+
+            <div
+                class="file-name"
+                id="fileName">
+
+                No video selected
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO INFORMATION -->
+
+        <div class="upload-fields">
+
+            <input
+                id="uploadTitle"
+                type="text"
+                placeholder="Video title">
+
+            <textarea
+                id="uploadDescription"
+                placeholder="Description"></textarea>
+
+            <select id="uploadCategory">
+
+                <option>
+                    Gaming
+                </option>
+
+                <option>
+                    Technology
+                </option>
+
+                <option>
+                    Entertainment
+                </option>
+
+                <option>
+                    Other
+                </option>
+
+            </select>
+
+
+            <button
+                class="publish-button"
+                onclick="publishVideo()">
+
+                Publish Video
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     [22] FOOTER
+========================================================= -->
+
+<footer>
+
+    <div>
+        © 2026 UNSEALED
+    </div>
+
+    <div>
+        Independent · Unfiltered · Unsealed
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   [23] NAVIGATION SCROLL EFFECT
+========================================================= */
+
+window.addEventListener("scroll", function() {
+
+    const navbar =
+        document.getElementById("navbar");
+
+    if (window.scrollY > 50) {
+
+        navbar.classList.add("scrolled");
+
+    } else {
+
+        navbar.classList.remove("scrolled");
+
+    }
+
+});
+
+
+/* =========================================================
+   [24] SCROLL TO LATEST
+========================================================= */
+
+function scrollToLatest() {
+
+    document
+        .getElementById("latest")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================================================
+   [25] VIDEO MODAL
+========================================================= */
+
+function openVideo(
+    source,
+    title,
+    category
+) {
+
+    const modal =
+        document.getElementById("videoModal");
+
+    const video =
+        document.getElementById("modalVideo");
+
+    document.getElementById("modalTitle")
+        .textContent = title;
+
+    document.getElementById("modalCategory")
+        .textContent = category;
+
+    video.src = source;
+
+    modal.classList.add("active");
+
+    video.play().catch(() => {});
+
+}
+
+
+function closeVideo() {
+
+    const modal =
+        document.getElementById("videoModal");
+
+    const video =
+        document.getElementById("modalVideo");
+
+    video.pause();
+
+    video.src = "";
+
+    modal.classList.remove("active");
+
+}
+
+
+/* =========================================================
+   [26] CATEGORY FILTER
+========================================================= */
+
+function filterVideos(
+    category,
+    button
+) {
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+
+    document
+        .querySelectorAll(".video-card")
+        .forEach(card => {
+
+            if (
+                category === "all" ||
+                card.dataset.category === category
+            ) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   [27] ADMIN LOGIN
+========================================================= */
+
+/*
+    DEMONSTRATION ONLY
+
+    IMPORTANT:
+    A password stored inside JavaScript is NOT secure
+    for a real public website.
+
+    This is only included so the single-file prototype
+    has an admin interface.
+
+    For production, authentication must be performed
+    server-side.
+*/
+
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "CHANGE_THIS_PASSWORD";
+
+
+function openAdmin() {
+
+    document
+        .getElementById("adminOverlay")
+        .classList.add("active");
+
+}
+
+
+function closeAdmin() {
+
+    document
+        .getElementById("adminOverlay")
+        .classList.remove("active");
+
+}
+
+
+function loginAdmin() {
+
+    const username =
+        document.getElementById("adminUsername")
+        .value;
+
+    const password =
+        document.getElementById("adminPassword")
+        .value;
+
+
+    if (
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
+    ) {
+
+        closeAdmin();
+
+        document
+            .getElementById("dashboard")
+            .classList.add("active");
+
+    } else {
+
+        alert("Invalid admin credentials.");
+
+    }
+
+}
+
+
+/* =========================================================
+   [28] ADMIN LOGOUT
+========================================================= */
+
+function logoutAdmin() {
+
+    document
+        .getElementById("dashboard")
+        .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   [29] VIDEO FILE SELECTION
+========================================================= */
+
+let selectedVideo = null;
+
+
+function showFileName() {
+
+    const input =
+        document.getElementById("videoUpload");
+
+    selectedVideo =
+        input.files[0];
+
+
+    if (selectedVideo) {
+
+        document
+            .getElementById("fileName")
+            .textContent =
+            selectedVideo.name;
+
+    }
+
+}
+
+
+/* =========================================================
+   [30] PUBLISH VIDEO
+========================================================= */
+
+function publishVideo() {
+
+    if (!selectedVideo) {
+
+        alert("Please select a video.");
+
+        return;
+
+    }
+
+
+    const title =
+        document
+        .getElementById("uploadTitle")
+        .value;
+
+
+    const description =
+        document
+        .getElementById("uploadDescription")
+        .value;
+
+
+    const category =
+        document
+        .getElementById("uploadCategory")
+        .value;
+
+
+    if (!title) {
+
+        alert("Please enter a title.");
+
+        return;
+
+    }
+
+
+    /*
+        Because this is a single HTML file,
+        the selected video can only exist locally
+        in the browser session.
+
+        A production version would send this file
+        to your server/storage here.
+    */
+
+    const videoURL =
+        URL.createObjectURL(selectedVideo);
+
+
+    const card =
+        document.createElement("article");
+
+
+    card.className = "video-card";
+
+    card.dataset.category = category;
+
+
+    card.innerHTML = `
+
+        <div class="thumbnail">
+
+            <video
+                muted
+                preload="metadata">
+
+                <source
+                    src="${videoURL}"
+                    type="${selectedVideo.type}">
+
+            </video>
+
+            <div class="play-icon"></div>
+
+        </div>
+
+        <div class="card-info">
+
+            <div class="card-category">
+                ${category}
+            </div>
+
+            <div class="card-title">
+                ${escapeHTML(title)}
+            </div>
+
+            <div class="card-date">
+                JUST NOW
+            </div>
+
+        </div>
+
+    `;
+
+
+    card.onclick = function() {
+
+        openVideo(
+            videoURL,
+            title,
+            category
+        );
+
+    };
+
+
+    document
+        .getElementById("videoGrid")
+        .prepend(card);
+
+
+    alert(
+        "Video added to the current session."
+    );
+
+
+    /*
+        Reset uploader
+    */
+
+    selectedVideo = null;
+
+    document
+        .getElementById("videoUpload")
+        .value = "";
+
+    document
+        .getElementById("fileName")
+        .textContent =
+        "No video selected";
+
+    document
+        .getElementById("uploadTitle")
+        .value = "";
+
+    document
+        .getElementById("uploadDescription")
+        .value = "";
+
+}
+
+
+/* =========================================================
+   [31] BASIC HTML ESCAPING
+========================================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   [32] CLOSE MODAL WITH ESCAPE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeVideo();
+
+            closeAdmin();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
